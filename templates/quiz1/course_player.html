@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HK Group Limited - Stream Player Portal</title>
+    <style>
+        body { background: #020408; color: #e2e8f0; font-family: 'Segoe UI', sans-serif; text-align: center; padding: 40px; }
+        .player-box { max-width: 700px; margin: 0 auto; background: #0f172a; padding: 35px; border-radius: 24px; border: 2px solid #00f2fe; box-shadow: 0 0 30px rgba(0, 242, 254, 0.15); }
+        .progress-container { width: 100%; background: #1e293b; height: 12px; border-radius: 10px; margin-top: 25px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); }
+        .progress-bar { width: 0%; height: 100%; background: linear-gradient(90deg, #00f2fe, #00e676); transition: width 0.1s; }
+        .lock-banner { color: #ef4444; font-weight: bold; margin-top: 20px; font-size: 1.1em; letter-spacing: 0.5px; }
+        .unlock-btn { display: none; background: linear-gradient(90deg, #00e676, #00c853); padding: 15px 35px; border-radius: 12px; color: white; font-weight: bold; border: none; cursor: pointer; margin: 25px auto 0 auto; font-size: 1.1em; box-shadow: 0 0 20px #00e676; animation: glowing 1.5s infinite; }
+        @keyframes glowing { 0% { box-shadow: 0 0 5px #00e676; } 50% { box-shadow: 0 0 20px #00e676; } 100% { box-shadow: 0 0 5px #00e676; } }
+    </style>
+</head>
+<body>
+
+<div class="player-box">
+    <h2 style="color: #00f2fe; margin-top: 0;">🎥 Course Topic Stream Matrix: {{ topic_name }}</h2>
+    <p style="color: #94a3b8;">You must track this orientation lesson completely until the progress indicator hits 100% to authorize your exam access credentials.</p>
+    
+    <video id="courseVideo" width="100%" controls controlsList="nodownload" style="border-radius:14px; border: 2px solid #1e293b; background: #000;">
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+    </video>
+
+    <div class="progress-container">
+        <div id="pBar" class="progress-bar"></div>
+    </div>
+    
+    <div id="lockStatus" class="lock-banner">🔒 CORE EVALUATION GATE: LOCKED (Watch tracking stream completely)</div>
+    
+    <button id="unlockBtn" class="unlock-btn" onclick="window.location.href='/arena/'">🚀 Telemetry Verified: Initialize Core Quiz Arena ➔</button>
+</div>
+
+<script>
+    const video = document.getElementById('courseVideo');
+    const pBar = document.getElementById('pBar');
+    const lockStatus = document.getElementById('lockStatus');
+    const unlockBtn = document.getElementById('unlockBtn');
+
+    // Monitors real-time media array changes cleanly
+    video.addEventListener('timeupdate', () => {
+        if(video.duration) {
+            const percentageCompleted = (video.currentTime / video.duration) * 100;
+            pBar.style.width = percentageCompleted + '%';
+
+            if (percentageCompleted >= 99.2) {
+                lockStatus.style.display = 'none';
+                unlockBtn.style.display = 'block';
+                video.removeAttribute('controls'); // Locks player layout modifications
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

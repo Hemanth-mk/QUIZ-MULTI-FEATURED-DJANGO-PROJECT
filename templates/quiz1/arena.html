@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AgroNet Online Assessment Matrix</title>
+    <style>
+        body {
+            background: radial-gradient(circle at 50% 50%, #090d16 0%, #020408 100%);
+            color: #e2e8f0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 50px;
+        }
+        .assessment-panel {
+            max-width: 650px;
+            margin: 0 auto;
+            background: rgba(15, 23, 42, 0.75);
+            border: 2px solid #00f2fe;
+            box-shadow: 0 0 30px rgba(0, 242, 254, 0.15);
+            border-radius: 24px;
+            padding: 40px;
+            backdrop-filter: blur(12px);
+        }
+        .header-title {
+            font-weight: 900;
+            background: linear-gradient(90deg, #00f2fe, #00e676);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2.2em;
+            margin-bottom: 5px;
+        }
+        .telemetry-tag {
+            display: inline-block;
+            background: rgba(0, 242, 254, 0.1);
+            color: #00f2fe;
+            border: 1px solid #00f2fe;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .option-container {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 14px 20px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+        }
+        .option-container:hover {
+            background: rgba(0, 242, 254, 0.05);
+            border-color: #00f2fe;
+        }
+        .option-container input {
+            margin-right: 15px;
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+        .submit-btn {
+            background: linear-gradient(90deg, #00e676, #00c853);
+            color: white;
+            font-weight: bold;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            font-size: 1.1em;
+            box-shadow: 0 4px 14px rgba(0,230,118,0.3);
+            transition: transform 0.2s;
+        }
+        .submit-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+        .timer-box { float: right; font-weight: 900; color: #ff1744; font-size: 1.2em; text-shadow: 0 0 10px rgba(255,23,68,0.3); }
+    </style>
+</head>
+<body>
+
+<div class="assessment-panel">
+    <div class="timer-box">⏱️ <span id="clockDisplay">00:00</span></div>
+    
+    <div class="header-title">⚡ HK Cmp Pvt Limited</div>
+    <p style="color:#64748b; margin-top:0;">Secure Session Pipeline: <b style="color:#cbd5e1;">{{ name }}</b></p>
+    
+    <div style="display: flex; gap: 8px;">
+        <div class="telemetry-tag">Task Frame {{ current_step }} / {{ total_questions }}</div>
+        <div class="telemetry-tag" style="color:#00e676; border-color:#00e676; background:rgba(0,230,118,0.1);">Domain: {{ category }}</div>
+        <div class="telemetry-tag" style="color:#ff9100; border-color:#ff9100; background:rgba(255,145,0,0.1);">Tier: {{ difficulty|upper }}</div>
+    </div>
+
+    <form method="post" id="quizForm">
+        {% csrf_token %}
+        <div style="font-size:1.35em; margin-bottom:25px; font-weight:700; color:#ffffff; line-height:1.4;">
+            {{ question.question_text }}
+        </div>
+        
+        {% for choice in question.choices %}
+            <label class="option-container">
+                <input type="radio" name="answer_choice" value="{{ choice }}" required>
+                <span>{{ choice }}</span>
+            </label>
+        {% endfor %}
+        
+        <input type="hidden" name="infractions_delta" id="infractionsDelta" value="0">
+        
+        <button type="submit" class="submit-btn">Transmit Answer Frame ➔</button>
+    </form>
+</div>
+
+<script>
+    // 1. Precise Server Synchronized Clock Countdown 
+    let remainingSeconds = parseInt("{{ seconds_remaining }}");
+    const clockDisplay = document.getElementById('clockDisplay');
+    
+    const interval = setInterval(() => {
+        let minutes = Math.floor(remainingSeconds / 60);
+        let seconds = remainingSeconds % 60;
+        
+        clockDisplay.innerText = 
+            (minutes < 10 ? "0" : "") + minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+            
+        if (remainingSeconds <= 0) {
+            clearInterval(interval);
+            document.getElementById('quizForm').submit(); // Auto-submit on expiration
+        }
+        remainingSeconds--;
+    }, 1000);
+
+    // 2. Client Identity Security Interception Listener
+    let tabChangesCounter = 0;
+    document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+            tabChangesCounter++;
+            document.getElementById("infractionsDelta").value = "1"; // Alert backend step logs
+            alert("⚠️ SECURITY MONITOR WARNING: Inter-window transition detected! Infraction parameter recorded.");
+        }
+    });
+</script>
+
+</body>
+</html>

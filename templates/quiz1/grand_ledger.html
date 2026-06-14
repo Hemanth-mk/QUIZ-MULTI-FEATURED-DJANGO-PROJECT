@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HK Group Limited - Assessment Ledger</title>
+    <style>
+        body { 
+            background: radial-gradient(circle at 50% 50%, #090d16 0%, #020408 100%);
+            color: #e2e8f0; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            padding: 50px; 
+            text-align: center; 
+        }
+        
+        .ledger-panel { 
+            max-width: 650px; 
+            margin: 0 auto; 
+            background: rgba(15, 23, 42, 0.8); 
+            padding: 45px; 
+            border-radius: 28px; 
+            border: 2px solid #00e676; 
+            backdrop-filter: blur(20px); 
+            box-shadow: 0 0 40px rgba(0, 230, 118, 0.15);
+        }
+        
+        /* --- HIGH PERFORMANCE 100% PERFECT SCORE BIG BAZAAR SPECTACLE --- */
+        {% if percentage == 100 %}
+        .ledger-panel {
+            animation: bigBazaarFlash 0.4s infinite alternate;
+            border-color: #ffeb3b !important;
+        }
+        @keyframes bigBazaarFlash {
+            0% { box-shadow: 0 0 35px #ff1744; border-color: #ff1744; }
+            100% { box-shadow: 0 0 60px #2563eb; border-color: #2563eb; }
+        }
+        {% endif %}
+        
+        .medal-logo { font-size: 5.5em; filter: drop-shadow(0 0 20px currentColor); margin: 15px 0; }
+        .gold { color: #ffd700; } .silver { color: #cbd5e1; } .bronze { color: #cd7f32; } .diamond { color: #00f2fe; }
+
+        .telemetry-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            margin: 25px 0;
+        }
+        .metric-widget {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
+            padding: 16px;
+        }
+        .widget-label { font-size: 0.75em; text-transform: uppercase; letter-spacing: 1px; color: #64748b; font-weight: bold; margin-bottom: 4px; }
+        .widget-value { font-size: 1.35em; font-weight: 800; color: #ffffff; }
+
+        /* Elegant Official Corporate Certificate Frame Styles */
+        .official-certificate { 
+            background: #ffffff; 
+            color: #0f172a; 
+            padding: 35px; 
+            border: 8px double #1e293b; 
+            border-radius: 6px; 
+            margin-top: 35px; 
+            box-shadow: 0 15px 40px rgba(255,255,255,0.08); 
+            text-align: center;
+        }
+        
+        .diamond-vault { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr 1fr; 
+            gap: 10px; 
+            margin-top: 25px; 
+        }
+        .price-token { padding: 12px; border-radius: 10px; font-weight: 800; font-size: 0.85em; color: white; border: 1px solid rgba(255,255,255,0.1); }
+
+        .btn-home {
+            display: inline-block; background: linear-gradient(90deg, #00f2fe, #4facfe);
+            color: white !important; font-weight: bold; text-decoration: none;
+            padding: 12px 30px; border-radius: 10px; margin-top: 30px;
+            box-shadow: 0 4px 12px rgba(0, 242, 254, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+<div class="ledger-panel">
+    
+    {% if percentage == 100 %}
+        <h1 style="margin:0; background: linear-gradient(90deg, #ff1744, #2563eb, #00e676); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2.3em;">🛒 BIG BAZAAR MEGA REWARD UNLOCKED 🎰</h1>
+    {% else %}
+        <h1 style="margin:0; background: linear-gradient(90deg, #00f2fe, #00e676); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2.3em;">📊 ASSESSMENT METRICS HUB</h1>
+    {% endif %}
+    
+    <p style="color:#64748b; margin-top: 5px;">Secure Candidate Record: <b style="color: #cbd5e1;">{{ name }}</b></p>
+
+    <div class="telemetry-grid">
+        <div class="metric-widget">
+            <div class="widget-label">🎯 Net Score Count</div>
+            <div class="widget-value" style="color: #00e676;">{{ score }} / {{ total_questions }}</div>
+        </div>
+        <div class="metric-widget">
+            <div class="widget-label">📈 Accuracy Index</div>
+            <div class="widget-value" style="color: #00f2fe;">{{ percentage }}%</div>
+        </div>
+        <div class="metric-widget">
+            <div class="widget-label">⏱️ Performance Velocity</div>
+            <div class="widget-value">{{ duration }} seconds</div>
+        </div>
+        <div class="metric-widget">
+            <div class="widget-label">🛡️ Compliance Infractions</div>
+            <div class="widget-value" style="color: {% if infractions == 0 %}#00e676{% else %}#ff1744{% endif %};">{{ infractions }}</div>
+        </div>
+    </div>
+
+    {% if percentage == 100 %}
+        <div class="medal-logo diamond" style="animation: bounce 1s infinite alternate;">👑</div>
+        <h3 style="color:#ffeb3b; font-size:1.6em; margin:0; text-shadow: 0 0 10px rgba(255,235,59,0.3);">👑 SYSTEM MATRIX ARCHETYPE: ABSOLUTE MASTERY</h3>
+        
+        <div class="diamond-vault">
+            <div class="price-token" style="background:#ef4444; box-shadow: 0 0 15px rgba(239,68,68,0.5);">🔴 Red Diamond Price Granted</div>
+            <div class="price-token" style="background:#2563eb; box-shadow: 0 0 15px rgba(37,99,235,0.5);">🔵 Blue Diamond Price Granted</div>
+            <div class="price-token" style="background:#16a34a; box-shadow: 0 0 15px rgba(22,163,74,0.5);">🟢 Green Diamond Price Granted</div>
+        </div>
+    {% elif percentage >= 85 %}
+        <div class="medal-logo gold">🥇</div>
+        <h3 style="color:#ffd700; font-size:1.5em; margin:0;">🥇 GOLD MEDAL RANK ACCREDITED</h3>
+    {% elif percentage >= 75 %}
+        <div class="medal-logo silver">🥈</div>
+        <h3 style="color:#cbd5e1; font-size:1.5em; margin:0;">🥈 SILVER MEDAL COMPETENCY GRANTED</h3>
+    {% elif percentage >= 65 %}
+        <div class="medal-logo bronze">🥉</div>
+        <h3 style="color:#cd7f32; font-size:1.5em; margin:0;">🥉 BRONZE MEDAL MILESTONE REGISTERED</h3>
+    {% elif percentage >= 50 %}
+        <h3 style="color:#00e676; font-size:1.4em;">PASSING STANDARD CRITERIA AUTHORIZED</h3>
+    {% else %}
+        <h3 style="color:#ff1744; font-size:1.4em;">⚠️ EVALUATION CONTEXT FIELD: FAIL DEFICIT</h3>
+    {% endif %}
+
+    {% if certificate_unlocked %}
+        <div class="official-certificate">
+            <h2 style="font-family:'Times New Roman', serif; margin:0; font-weight: 800; color:#0f172a; letter-spacing: 1px;">CERTIFICATE OF EXPERT COMPETENCY</h2>
+            <p style="font-size:0.75em; font-weight:800; letter-spacing:2px; margin:5px 0; color:#64748b;">ISSUED VIA GLOBAL REGISTRY OF HK GROUP LIMITED</p>
+            <br>
+            <p style="font-size:1.05em; color:#334155; margin:0;">This cryptographically verifiable document tokens that</p>
+            <h3 style="font-size:1.8em; font-family:serif; margin:10px 0; color:#111827; border-bottom: 2px solid #cbd5e1; display:inline-block; padding-bottom:2px;">
+                {{ name }}
+            </h3>
+            <p style="font-size:1.05em; color:#334155; margin:0;">has passed all algorithmic structural evaluation vectors with distinguished honors.</p>
+            <br>
+            <p style="font-size:0.75em; font-family:monospace; color:#94a3b8; text-align:right; margin: 15px 0 0 0;">Transaction Lock Verification Key: SHA256-HK{{ score }}X{{ percentage }}</p>
+        </div>
+    {% endif %}
+
+    <a href="/" class="btn-home">➔ Restart Systems Hub</a>
+</div>
+
+</body>
+</html>
