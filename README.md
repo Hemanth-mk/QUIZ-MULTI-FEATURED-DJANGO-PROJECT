@@ -11,7 +11,6 @@ Bootstrap/Tailwind CSS
 Local Storage / JSON Data
 Vite
 
-Project Complexity: ⭐⭐⭐⭐☆ (Intermediate to Advanced)
 
 Key Highlights:
 
